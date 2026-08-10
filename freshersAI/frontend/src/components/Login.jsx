@@ -28,7 +28,9 @@ const Login = () => {
         const token = await result.user.getIdToken();
 
         const response = await api.post('/api/auth/login', { token });
+        onclose(); // Close the login modal after successful login
         console.log("Google login successful:", token);
+        navigate("/dashboard");
     }catch(error){
       console.error("Google login failed:", error);
     }

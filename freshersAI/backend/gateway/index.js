@@ -4,6 +4,8 @@ import cors from "cors";
 import proxy from "express-http-proxy";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
+import { isAuth } from "./middlewares/isAuth.js";
+import { getCurrentUser } from "./controllers/user.controller.js";
 
 dotenv.config();
 
@@ -29,6 +31,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", proxy(process.env.AUTH_SERVICE_URL));
+app.use("/api/me",isAuth,getCurrentUser);
 
 
 
